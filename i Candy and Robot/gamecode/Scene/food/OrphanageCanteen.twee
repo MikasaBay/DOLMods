@@ -1,0 +1,69 @@
+:: iMod Widget OrphanageCanteen [widget]
+<<widget "OrphanageCanteenEntrance">>
+	<<set _link to lanSwitch("Orphanage Canteen", "孤儿院食堂") + '(00:01)'>>
+	<<link _link "Orphanage Canteen">>
+		<<pass 1>>
+	<</link>>
+<</widget>>
+
+:: Orphanage Canteen [scene]
+
+<div id='locationdes'>
+<<if (!$tvar.scene.passage || $tvar.scene.type == 'Scene') and $phase is 0>>
+	<<set _output to "Orphanage Canteen localDescription " + setup.language>>
+	<<include _output>>
+	<br><br>
+<</if>>
+</div>
+
+<div id='content'>
+	<<if $tvar.scene.passage>>
+		<<include $tvar.scene.passage>>
+	<<elseif Time.hour >= 18 && Time.hour <= 19>> 
+		<<include 'Scene Orphanage Canteen'>>
+	<</if>>
+</div>
+
+<br><br><br>
+
+<<set _link to lanSwitch("have a dinner", "吃顿饭") + '(00:30)'>>
+<<if Time.hour >= 18 && Time.hour <= 19>>
+	<<link _link "Orphanage Canteen Eat">>
+		<<run V.thirst -=1000;V.hunger -=1000;>>
+		<<pass 30>>
+	<</link>>
+<</if>>
+<br>
+
+<<set _link2 = getLan('leave')>>
+	<<getouticon>><<link _link2 "Orphanage">>
+	<</link>>    
+	
+:: Orphanage Canteen Eat
+<<widget "OrphanageCanteenEat">>
+	<<include '你在孤儿院食堂饱餐了一顿'>><<llhunger>><<llthirst>>
+<</widget>>
+
+<br><br><br>
+
+<<set _link to lanSwitch("Orphanage Canteen", "孤儿院食堂")>>
+	<<link _link "Orphanage Canteen">>
+	<</link>>
+
+:: Orphanage Canteen localDescription CN
+你来到了孤儿院的食堂。
+<<if Time.hour < 18 || Time.hour > 19>>
+	这个时间食堂里面空荡荡，一个人都没有。如果要吃饭的话记得18:00-19:00来。
+<</if>>
+
+:: Orphanage Canteen localDescription EN
+You come to the canteen.
+<<if Time.hour < 18 || Time.hour > 19>>
+	The canteem is closed at this time, and there is no one inside.If you want to eat, remember to come from 18:00 to 19:00.
+<</if>>
+
+:: Scene Orphanage Canteen
+<<=lanSwitch(
+	"The canteen of the orphanage was a large room filled with the chatter of children. Long wooden tables were neatly arranged in rows, each accompanied by benches worn smooth from years of use. The aroma of tonight's meal, a simple but hearty stew, wafted through the air, mingling with the sounds of clinking utensils and the sound of eating.",
+	"孤儿院的食堂是一个宽敞的房间，充满了孩子们的喋喋不休。长长的木桌整齐地排列成排，每张桌子旁边都有长凳，经过多年的使用已经磨得光滑。今晚的饭菜——简单但丰盛的炖菜的香气在空气中弥漫，夹杂着餐具碰撞声和吃饭的吧唧声。"
+)>>

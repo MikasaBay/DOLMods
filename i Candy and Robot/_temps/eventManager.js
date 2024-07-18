@@ -293,11 +293,11 @@ const iStage = {
      *  event: Object.<string, SceneData[]>,
      * }}
      */
-    data : {
-        chara   : {},  // chara event
-        scene   : {},  // static location event
-        event   : [],  // stage event
-        passage : []   // passage event
+    data: {
+        chara: {},  // chara event
+        scene: {},  // static location event
+        event: [],  // stage event
+        passage: []   // passage event
     },
     /**
      * @type { {
@@ -306,7 +306,7 @@ const iStage = {
      * }
      * }}
      */
-    widget : {},
+    widget: {},
 
     /**
      * @type {
@@ -317,9 +317,9 @@ const iStage = {
      *    event: function
      * }}
      */
-    listener : {},
+    listener: {},
 
-    patch : {},
+    patch: {},
 
     /**
      * @description sort by priority, make sure non-priority property is at the end
@@ -388,7 +388,7 @@ const iStage = {
             event.series = chara;
             this.data.chara[chara].push(event);
         });
-        
+
         this.sort(this.data.chara[chara]);
     },
 
@@ -405,7 +405,7 @@ const iStage = {
         if (type == 'chara' || type == 'scene') {
             return series ? this.data[type][series] : this.data[type];
         }
-        
+
         if (series) {
             return this.data[type].filter(event => event.series == series);
         }
@@ -459,7 +459,7 @@ const iStage = {
         if (!this.patch[passage]) {
             this.patch[passage] = [];
         }
-        
+
         this.patch[passage].push(message);
     },
     //----------------------------------------------------------------
@@ -694,13 +694,13 @@ const iStage = {
             const text = Story.get(`${scene.title}::Root`).text;
             new Wikifier(null, text);
         }
-        
+
         // if has separate script
         if (Story.has(`${passage}::Script`)) {
             const text = Story.get(`${passage}::Script`).text;
             new Wikifier(null, text);
         }
-        
+
         // do phase
         if (!scene.init) {
             scene.init = true;
@@ -920,7 +920,7 @@ const iStage = {
             if (
                 event.entry && event.entry != title ||
                 event.titleMatch && !title.match(event.titleMatch) ||
-                event.keys &&  title.has(event.keys) !== event.keysNum
+                event.keys && title.has(event.keys) !== event.keysNum
             ) {
                 continue;
             }

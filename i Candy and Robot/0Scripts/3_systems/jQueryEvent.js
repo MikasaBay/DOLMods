@@ -1,11 +1,11 @@
 setup.gamereloadcheck = true;
 
 $(document).on(':passageinit', data => {
-//------------------------------------------------------------
-//
-// 数据初始化
-//
-//------------------------------------------------------------
+    //------------------------------------------------------------
+    //
+    // 数据初始化
+    //
+    //------------------------------------------------------------
     if (typeof V.addMsg == 'undefined') {
         V.addMsg = '';
         V.afterMsg = '';
@@ -18,7 +18,7 @@ $(document).on(':passageinit', data => {
 
     if (V.combat == 1) {
         R.combat = {
-            angel : 0, total : 0
+            angel: 0, total: 0
         };
     }
     else {
@@ -33,11 +33,11 @@ $(document).on(':passageinit', data => {
     //
     //------------------------------------------------------------
     const psg = {
-        title : clone(data.passage.title),
-        tags  : clone(data.passage.tags),
-        text  : clone(data.passage.text)
+        title: clone(data.passage.title),
+        tags: clone(data.passage.tags),
+        text: clone(data.passage.text)
     };
-    const lastPsg =  Story.get(passage());
+    const lastPsg = Story.get(passage());
 
     console.log('check data in init:', data);
     console.log('check passage in init:', lastPsg.title, psg);
@@ -54,13 +54,13 @@ $(document).on(':passageinit', data => {
     }
 
     // 初始化场景设置
-    iEvent.initBaseScene(psg);
+    eventManager.initBaseScene(psg);
 
     // 如果刚从动作事件里退出
     if (V.tvar.unsetAction) {
         delete V.tvar.unsetAction;
-		
-        F.resetTvar('message','useItem', 'img', 'passtime', 'onemore', 'usemethod');
+
+        F.resetTvar('message', 'useItem', 'img', 'passtime', 'onemore', 'usemethod');
         // 如果从物品事件出来，在这里就不再执行事件检测了
         return;
     }
@@ -72,7 +72,7 @@ $(document).on(':passageinit', data => {
     }
 
     iCandyRecover();
-    
+
     // 检测口袋更新状态。
     updatePocketsAtCheckBath(psg, lastPsg);
 
@@ -83,13 +83,13 @@ $(document).on(':passageinit', data => {
     }
 
     // 检测事件
-    iEvent.eventReady(psg);
+    eventManager.eventReady(psg);
 
     if (V.tvar.jump) {
         console.time('bakup');
         window.bak = clone(V);
         console.timeEnd('bakup');
-        iEvent.startScene();
+        eventManager.startScene();
     }
 });
 

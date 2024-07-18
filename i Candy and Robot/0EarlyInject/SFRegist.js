@@ -1,5 +1,5 @@
 simpleFrameworks.addto('iModInit', 'iCandyInit');
-simpleFrameworks.addto('iModReady','iCandyUpdate', 'iCandyReady');
+simpleFrameworks.addto('iModReady', 'iCandyUpdate', 'iCandyReady');
 simpleFrameworks.addto('iModDone', 'iCandyDone');
 
 simpleFrameworks.addto('ModMenuBig', 'showItemsButton');
@@ -16,10 +16,15 @@ simpleFrameworks.addto('iModSettings', 'iCandySettings');
 simpleFrameworks.addto('iModCheats', 'iCandyCheats');
 
 simpleFrameworks.addto('ModShopZone', {
-    passage : 'Pharmacy',
-    widget  : 'ExtraPharmacy'
+    passage: 'Pharmacy',
+    widget: 'ExtraPharmacy'
 });
 
 simpleFrameworks.addto('ExtraLinkZone', 'iCandyExtraLink');
 simpleFrameworks.addto('BeforeLinkZone', 'iCandyBeforeLink');
+
+simpleFrameworks.addto('BeforeLinkZone', {
+    passage: 'Forest Cabin Food',
+    widget: 'EatEdenKitchen'
+});
 

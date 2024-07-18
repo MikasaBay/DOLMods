@@ -80,3 +80,40 @@
 <br>
 
 <</widget>>
+
+<<widget "EatSoupKitchen">>
+    <!-- <<if V.hunger > 600 || V.thirsty > 750>> -->
+        <<ind>>
+        <<lanLink $passage>>
+            <<lan 'EN' 'Have a Congee (00:15)'>>
+            <<lan 'CN' '喝点粥 (00:15)'>>
+            <<linkcode>>
+                <<set $addMsg += lanSwitch('You drank a bowl of Congee in the Soup kitchen.', '你在施粥所里喝了碗粥。')>> <<lhunger>> <<lthirst>>
+                <<run 
+                    V.hunger -= 400;
+                    V.thirst -= 500;
+                >>
+            <<pass 15>>
+            
+        <</lanLink>>
+        <br>
+    <!-- <</if>> -->
+<</widget>>
+
+<<widget "EatEdenKitchen">>
+    <!-- <<if V.hunger > 600 || V.thirsty > 750>> -->
+        <<ind>>
+        <<lanLink $passage>>
+            <<lan 'EN' 'Have a Wild Game (00:30)'>>
+            <<lan 'CN' '喝野味 (00:30)'>>
+            <<linkcode>>
+                <<set $addMsg += lanSwitch("You have a wild game in Eden's kitchen.", '你在伊甸的厨房里吃了顿野味。')>> <<lhunger>> <<lthirst>>
+                <<run 
+                    V.hunger -= 1000;
+                    V.thirst -= 1000;
+                >>
+            <<pass 30>>
+        <</lanLink>>
+        <br>
+    <!-- <</if>> -->
+<</widget>>

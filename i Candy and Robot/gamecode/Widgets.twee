@@ -103,6 +103,132 @@
     <</append>>
 <</widget>>
 
+<!-- 以下是新增的进餐描述 -->
+<<widget "eatDinnerOrphanage">>
+    <<hunger -1200>>
+    <<thirsty -1200>>
+    <<append #addMsg transition>>
+        <<=lanSwitch(
+            'You fill your stomach',
+            '你填饱了肚子',
+        )>> <<lllhunger>> <<llthirst>>
+    <</append>>
+<</widget>>
+
+<<widget "eatCaughtByEden">>
+    <<hunger -1200>>
+    <<thirsty -1200>>
+    <<append #addAfterMsg>>
+        <<=lanSwitch(
+            'You fill your stomach',
+            '你填饱了肚子',
+        )>> <<lllhunger>> <<llthirst>>
+    <</append>>
+<</widget>>
+
+<<widget "drinkCoffeeInCafe">>
+    <<hunger -100>>
+    <<thirsty -1000>>
+    <<append #addAfterMsg>>
+        <<=lanSwitch(
+            'You savor the bittersweet taste that spreads on your tongue.',
+            '你感受着苦中带甜的味道在舌尖蔓延。',
+        )>> <<lhunger>> <<llthirst>>
+    <</append>>
+<</widget>>
+
+<<widget "eatAleSaladInCafe">>
+    <<hunger -200>>
+    <<thirsty -900>>
+    <<append #addAfterMsg>>
+        <<=lanSwitch(
+            'You thoroughly enjoyed it, feeling a sense of contentment and relaxation wash over you.',
+            '你美美地享受了一番，感到一种满足和放松的感觉涌上心头。',
+        )>> <<lhunger>> <<llthirst>>
+    <</append>> 
+<</widget>>
+
+<<widget "eatPancakeInCafe">>
+    <<hunger -1000>>
+    <<thirsty -1000>>
+    <<append #addMsg transition>>
+        <<=lanSwitch(
+            'You have a hearty meal, and your fatigue disappears into thin air.',
+            '你饱餐一顿，疲倦随之飞到九霄之外。',
+        )>> <<llhunger>> <<llthirst>>
+    <</append>> 
+<</widget>>
+
+<<widget "eatDeluxeCreamBunInCafe">>
+    <<hunger -1500>>
+    <<thirsty -1000>>
+    <<append #addAfterMsg>>
+        <<=lanSwitch(
+            'You feel your stress melt away. ',
+            '你感到身心愉悦。',
+        )>> <<lllhunger>> <<llthirst>>
+    <</append>> 
+<</widget>>
+
+<<widget "eatBreakfastFarm">>
+    <<hunger -1200>>
+    <<thirsty -1200>>
+    <<append #addAfterMsg>>
+        <<=lanSwitch(
+            'You fill your stomach',
+            '你填饱了肚子',
+        )>> <<lllhunger>> <<llthirst>>
+    <</append>>
+<</widget>>
+
+<<widget "eatDinnerEden">>
+    <<hunger -1200>>
+    <<thirsty -1200>>
+    <<append #addMsg transition>>
+        <<=lanSwitch(
+            'You fill your stomach.',
+            '你填饱了肚子',
+        )>> <<lllhunger>> <<llthirst>>
+    <</append>>
+<</widget>>
+
+<<widget "eatGrassFirstTime">>
+    <<append #addAfterMsg>>
+        <br>
+            <<=lanSwitch(
+                'When you put a small piece of grass into your mouth, the first thing you notice is its dryness and rough texture. As you chew, the fibers of the grass bounce between your teeth, making it difficult to bite through. The taste is extremely bitter, almost making you want to spit it out. Even if you try to swallow it, your throat and stomach feel uncomfortable, as if bearing an unpleasant burden.',
+                '当你把一小块草放进嘴里时，首先感觉到的是它的干燥和粗糙。你咀嚼时，草的纤维在牙齿间弹来弹去，让你觉得很难咬碎它。尝起来，草的味道非常苦涩，几乎让你忍不住要吐出来。即使尝试咽下去，你的喉咙和胃部也感到难受，仿佛在承受着一种不适的负担。',
+            )>> 
+        <<llhunger>>
+    <</append>>
+<</widget>>
+
+<<widget "eatGrassInField">>
+    <<append #addMsg>>
+        <br>
+        <<if V.cow lte 2>>
+            <<=lanSwitch(
+                'When you put a small piece of grass into your mouth, the first thing you notice is its dryness and rough texture. As you chew, the fibers of the grass bounce between your teeth, making it difficult to bite through. The taste is extremely bitter, almost making you want to spit it out. Even if you try to swallow it, your throat and stomach feel uncomfortable, as if bearing an unpleasant burden.',
+                '当你把一小块草放进嘴里时，首先感觉到的是它的干燥和粗糙。你咀嚼时，草的纤维在牙齿间弹来弹去，让你觉得很难咬碎它。尝起来，草的味道非常苦涩，几乎让你忍不住要吐出来。即使尝试咽下去，你的喉咙和胃部也感到难受，仿佛在承受着一种不适的负担。',
+            )>> 
+        <<elseif V.cow lte 5>>
+            <<=lanSwitch(
+                'When you put a small piece of grass into your mouth, you feel its dryness and rough texture, but you've gradually become accustomed to it. As you chew, you can sense the fibers of the grass bouncing between your teeth, though it's a bit challenging to chew, it doesn't make you feel particularly uncomfortable. The taste remains bitter, yet you've grown to accept it without strong aversion. Even as you swallow, your throat and stomach don't feel as uncomfortable anymore, as if you've adapted to the experience.',
+                '当你把一小块草放进嘴里，虽然感觉到它的干燥和粗糙，但你已经逐渐习惯了这种口感。咀嚼时，你能感受到草的纤维在牙齿间弹跳，虽然有些难以咀嚼，但并不至于让你感到特别不适。尝起来，草的味道依然苦涩，但你已经能够接受这种味道，不再有强烈的反感。即使咽下去，你的喉咙和胃部也没有那么明显的不适感，仿佛已经适应了这种经历。',
+            )>> 
+        <<elseif V.cow gte 6>>
+            <<=lanSwitch(
+                'When you put a small piece of grass into your mouth, you feel its natural freshness. As you chew, you enjoy the gentle bounce of the grass fibers between your teeth, as if savoring the essence of nature. The taste, while slightly bitter, fills you with the vitality of life and the charm of the natural world. Even as you swallow, your throat and stomach are filled with a pleasant sensation, as if merging with nature itself.',
+                '当你把一小块草放进嘴里时，你感受到它的天然清新。咀嚼时，你享受到草的纤维在牙齿间轻柔地弹动，仿佛在品味大自然的味道。尝起来，草的味道虽然略带苦涩，但你却觉得这种味道充满了生命的活力和自然的魅力。即使咽下去，你的喉咙和胃部也充满了一种愉悦的感觉，仿佛与大自然融为一体。',
+            )>> 
+        <</if>>
+        <<llhunger>>
+        <br><br><br>
+    <</append>>
+<</widget>>
+
+
+
 <<widget "lanPassage">>
     <<set _passage to `${$args[0]} ${setup.language}`>>
     <<include _passage>>

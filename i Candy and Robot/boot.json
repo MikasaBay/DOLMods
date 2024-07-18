@@ -101,6 +101,7 @@
     "gamecode/Scene/HomeStorage.twee",
     "gamecode/Scene/Pharmacy.twee",
     "gamecode/Scene/Warehouse.twee",
+    "gamecode/Scene/food/OrphanageCanteen.twee",
     "gamecode/UseItems.twee",
     "gamecode/Widgets.twee",
     "gamecode/toybox.twee"

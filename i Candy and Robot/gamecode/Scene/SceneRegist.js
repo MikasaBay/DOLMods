@@ -4,28 +4,28 @@ iEvent
         'location',
 
         {
-            entrypassage : 'Brothel Basement',
-            exit         : 'Brothel Basement',
-            scene        : 'BrothelBasement',
+            entrypassage: 'Brothel Basement',
+            exit: 'Brothel Basement',
+            scene: 'BrothelBasement',
 
-            episode   : 'DrugsIntro',
-            type      : 'Event',
-            phase     : 3,
-            eventnext : true,
-            require   : data => iEvent.getFlag('brothel', 'drugsintro') !== 1
-            && V.brothel_basement_intro == 1 && V.tvar.lastPassage == 'Brothel'
+            episode: 'DrugsIntro',
+            type: 'Event',
+            phase: 3,
+            eventnext: true,
+            require: data => iEvent.getFlag('brothel', 'drugsintro') !== 1
+                && V.brothel_basement_intro == 1 && V.tvar.lastPassage == 'Brothel'
         },
 
         {
-            match : /[a-zA-Z]+ Street$|Park$/,
+            match: /[a-zA-Z]+ Street$|Park$/,
 
-            type     : 'Event',
-            toward   : 'Chinatown RandomRumors',
-            initcode : '<<set $tvar.scene.branch to random(1,4)>><<set $tvar.scene.exit to $tvar.lastPassage>>',
-            endcode  : '<<set $eventskip to 1>><<run iEvent.addFlag("chinatown", "rumors", 1); iEvent.addFlag("chinatown", "rumorstoday", 1)>>',
-            require  : data => iEvent.getFlag('chinatown', 'intro') == undefined
-            && V.location == 'town' && F.noEventRunning() && random(100) < 30
-            && Time.days > 2 && iEvent.getFlag('chinatown', 'rumorstoday') < 2
+            type: 'Event',
+            toward: 'Chinatown RandomRumors',
+            initcode: '<<set $tvar.scene.branch to random(1,4)>><<set $tvar.scene.exit to $tvar.lastPassage>>',
+            endcode: '<<set $eventskip to 1>><<run iEvent.addFlag("chinatown", "rumors", 1); iEvent.addFlag("chinatown", "rumorstoday", 1)>>',
+            require: data => iEvent.getFlag('chinatown', 'intro') == undefined
+                && V.location == 'town' && F.noEventRunning() && random(100) < 30
+                && Time.days > 2 && iEvent.getFlag('chinatown', 'rumorstoday') < 2
         }
     );
 
@@ -34,24 +34,24 @@ iEvent.registPsg('Brothel Basement Sex', () => {
     iEvent.addFlag('brothel', 'prostitution', 1);
 });
 
-iEvent.registEvent('Passout', {
-    type   : 'Event',
-    toward : 'Harvest Chinatown Rescue',
+eventManager.registEvent('Passout', {
+    type: 'Event',
+    toward: 'Harvest Chinatown Rescue',
 
-    require : () => {
+    require: () => {
         let passout = iEvent.getFlag('harvest', 'passout') || 0;
         passout += iEvent.getFlag('mer', 'passout') || 0;
-        return iEvent.getFlag('chinatown', 'prologue') == undefined && V.bus == 'harvest' && passout  >= 3 && Time.days > 2;
+        return iEvent.getFlag('chinatown', 'prologue') == undefined && V.bus == 'harvest' && passout >= 3 && Time.days > 2;
     }
 });
 
-iEvent.registPsg('Harvest Street',() => {
+iEvent.registPsg('Harvest Street', () => {
     if (V.stress >= V.stressmax) {
         iEvent.addFlag('harvest', 'passout', 1);
     }
 });
 
-iEvent.registPsg('Mer Street',() => {
+iEvent.registPsg('Mer Street', () => {
     if (V.stress >= V.stressmax) {
         iEvent.addFlag('mer', 'passout', 1);
     }
@@ -60,11 +60,10 @@ iEvent.registPsg('Mer Street',() => {
 iEvent.registPsg('Canteen Milkshake', () => {
     wikifier('thirsty', -1000);
     setTimeout(() => {
-        new Wikifier(null, `<<append #addAfterMsg>>${
-            lanSwitch(
-                'Your throat is moistened by the sweetness of the milkshake.',
-                '你喉咙被奶昔的甜蜜滋润了。')
-        }<<llthirst>><</append>>`);
+        new Wikifier(null, `<<append #addAfterMsg>>${lanSwitch(
+            'Your throat is moistened by the sweetness of the milkshake.',
+            '你喉咙被奶昔的甜蜜滋润了。')
+            }<<llthirst>><</append>>`);
     }, 60);
 });
 
@@ -78,7 +77,7 @@ iEvent.registPsg('Livestock Field', () => {
 
     data.innerHTML = data.innerHTML.replace(txt, '<div id="patchContent"></div>').replace('</div></a>', '</div>');
     const html = {
-        EN : ` Your knees buckle, and you fall to the grass.
+        EN: ` Your knees buckle, and you fall to the grass.
         <<if ($monsterchance gte 1 and ($hallucinations gte 1 or $monsterhallucinations is "f"))>>
             <<if maleChance() lt random(1, 100)>>
                 Cowgirls around the field look over in confusion.
@@ -87,7 +86,7 @@ iEvent.registPsg('Livestock Field', () => {
             <</if>>
         <</if>>`,
 
-        CN : `你的膝盖弯曲，然后你跪到草地上。
+        CN: `你的膝盖弯曲，然后你跪到草地上。
 		<<if ($monsterchance gte 1 and ($hallucinations gte 1 or $monsterhallucinations is "f"))>>
 			<<if maleChance() lt random(1, 100)>>
 				田野里的母牛们困惑地看着四周。
@@ -123,10 +122,10 @@ iEvent.registPsg('Livestock Field River', () => {
     const patch = document.createElement('div');
     patch.id = 'patchContent';
     data.replaceChild(patch, ref);
-    
+
     const inner = {
-        EN : 'You scoop up some water from the river with your hand and drink.  The cool water moistens your throat, <span class="teal"> you feel much better now.</span>',
-        CN : '你用手在河水捧起一些水喝下。清凉的的水润过你的喉咙，<span class="teal">你感觉舒服多了。</span>'
+        EN: 'You scoop up some water from the river with your hand and drink.  The cool water moistens your throat, <span class="teal"> you feel much better now.</span>',
+        CN: '你用手在河水捧起一些水喝下。清凉的的水润过你的喉咙，<span class="teal">你感觉舒服多了。</span>'
     };
 
     const macro = `<<replace #addAfterMsg transition>>${lanSwitch(inner)}<<thirsty -600>><<lllthirst>><br><br><</replace>><<replace #thirstcaption>><<thirstyBar>><</replace>>`;
@@ -144,12 +143,12 @@ iEvent
     .registEvent(
         'location',
         {
-            entrypassage : 'Garden',
-            toward       : 'Orphanage Garage Intro',
-    
-            type    : 'Event',
-            require : () => !iEvent.getFlag('orphanage', 'garageinit')
-            && iEvent.getFlag('orphanage', 'garageprocess') >= 6 && Time.dayState == 'day'
+            entrypassage: 'Garden',
+            toward: 'Orphanage Garage Intro',
+
+            type: 'Event',
+            require: () => !iEvent.getFlag('orphanage', 'garageinit')
+                && iEvent.getFlag('orphanage', 'garageprocess') >= 6 && Time.dayState == 'day'
         }
     );
 

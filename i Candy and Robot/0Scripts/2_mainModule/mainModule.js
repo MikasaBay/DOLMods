@@ -2,8 +2,8 @@
 // mirror
 for (const i in iModVariables) {
     Object.defineProperty(iCandy.variables, i, {
-        get : () => V[i],
-        set : value => {
+        get: () => V[i],
+        set: value => {
             V[i] = value;
         }
     });
@@ -13,28 +13,28 @@ iCandy.variableSetting = iModVariables;
 
 function setupFeatsBoost() {
     V.featsBoosts.upgrades = {
-        money           : 0,
-        grades          : 0,
-        skulduggery     : 0,
-        dancing         : 0,
-        swimming        : 0,
-        athletics       : 0,
-        tending         : 0,
-        housekeeping    : 0,
-        cooking         : 0,
-        mechanical      : 0,
-        chemical        : 0,
-        greenThumb      : 0,
-        seduction       : 0,
-        purity          : 0,
-        impurity        : 0,
-        newLife         : 0,
-        aNewBestFriend  : 0,
-        tattoos         : 0,
-        defaultMoves    : 0,
-        randomClothing  : 0,
-        specialClothing : 0,
-        sexToys         : 0
+        money: 0,
+        grades: 0,
+        skulduggery: 0,
+        dancing: 0,
+        swimming: 0,
+        athletics: 0,
+        tending: 0,
+        housekeeping: 0,
+        cooking: 0,
+        mechanical: 0,
+        chemical: 0,
+        greenThumb: 0,
+        seduction: 0,
+        purity: 0,
+        impurity: 0,
+        newLife: 0,
+        aNewBestFriend: 0,
+        tattoos: 0,
+        defaultMoves: 0,
+        randomClothing: 0,
+        specialClothing: 0,
+        sexToys: 0
     };
 
     const { upgradeDetails, missing, name } = V.featsBoosts;
@@ -81,7 +81,7 @@ function specialSleep() {
         else {
             V.tiredness -= 250;
         }
-        
+
         V.sleepStat++;
     }
 }
@@ -110,14 +110,16 @@ function iCandyInit() {
     }
 
     for (const [, datas] of Object.entries(iEvent.data)) {
-        datas.sort((a, b) => { b.priority - a.priority; });
+        console.log('datas:', datas)
+        // TODO bug
+        // datas.sort((a, b) => { b.priority - a.priority; });
     }
 
     if (Macro.has('destination')) {
         Macro.delete('destination');
         DefineMacroS('destination', destination);
     }
-    
+
     if (Macro.has('destinationeventend')) {
         Macro.delete('destinationeventend');
         DefineMacroS('destinationeventend', destinationeventend);
@@ -200,12 +202,12 @@ function iCandyUpdate() {
                 }
                 else {
                     V.iPockets.equip[k] = {
-                        type : 'misc',
-                        id   : 'none',
-                        name : 'none'
+                        type: 'misc',
+                        id: 'none',
+                        name: 'none'
                     };
                 }
-                
+
                 delete V.iPockets[key];
             }
         }
@@ -243,7 +245,7 @@ function iCandyUpdate() {
         if (typeof V.iStorage.home.serotonin == 'number') {
             for (const [key, value] of Object.entries(iStorage)) {
                 if (value.limitsize == undefined) continue;
-                
+
                 V.iStorage[key] = new Pocket('storage', key);
                 V.iStorage[key].limitsize = value.limitsize;
             }
@@ -256,12 +258,12 @@ function iCandyUpdate() {
 
             V.iCandyRobot.warehouseOwned = 0;
             V.iCandyRobot.lockersOwned = {
-                school          : 1,
-                strip_club      : 0,
-                brothel         : 0,
-                shopping_centre : 0,
-                office_building : 0,
-                beach           : 0
+                school: 1,
+                strip_club: 0,
+                brothel: 0,
+                shopping_centre: 0,
+                office_building: 0,
+                beach: 0
             };
         }
 
@@ -326,6 +328,48 @@ function iCandyUpdate() {
 }
 iCandy.modUpdate = iCandyUpdate;
 DefineMacroS('iCandyUpdate', iCandyUpdate);
+
+// 作弊菜单：饥饿
+function cheatAddHunger() {
+    V.hunger += 500;
+    if (V.hunger > C.hunger.max) {
+        V.hunger = C.hunger.max;
+    }
+    console.log('饥饿值：', V.hunger)
+}
+
+iCandy.cheatAddHunger = cheatAddHunger;
+
+function cheatSubtractHunger() {
+    V.hunger -= 500;
+    if (V.hunger < 0) {
+        V.hunger = 0;
+    }
+    console.log('饥饿值：', V.hunger)
+}
+
+iCandy.cheatSubtractHunger = cheatSubtractHunger;
+
+// 作弊菜单：口渴
+function cheatAddThirty() {
+    V.thirst += 500;
+    if (V.thirst > C.thirst.max) {
+        V.thirst = C.thirst.max;
+    }
+    console.log('口渴值：', V.thirst)
+}
+
+iCandy.cheatAddThirty = cheatAddThirty;
+
+function cheatSubtractThirty() {
+    V.thirst -= 500;
+    if (V.thirst < 0) {
+        V.thirst = 0;
+    }
+    console.log('口渴值：', V.thirst)
+}
+
+iCandy.cheatSubtractThirty = cheatSubtractThirty;
 
 
 function fixDrugEffect() {

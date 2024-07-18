@@ -17,6 +17,7 @@ const SimpleFrameworksDataTypeKeys = [
     'BeforeLinkZone',
     'ExtraLinkZone',
     'ModShopZone',
+    'addAfterMsg',
 
     'iModDone',
     'iModReady',

@@ -58,8 +58,15 @@
 
 <<widget "iCandyCheats">>
 <!-- 作弊  -->
-<<link '一键清空药效'>><<run iCandy.fixDrugEffect()>><</link>>
-<br>
+    <<link '减少500饥饿'>><<run iCandy.cheatSubtractHunger()>><<updatesidebarimg>><</link>> | 
+    <<link '增加500饥饿'>><<run iCandy.cheatAddHunger()>><<updatesidebarimg>><</link>>
+    <br>
+    <<link '减少500口渴'>><<run iCandy.cheatSubtractThirty()>><<updatesidebarimg>><</link>> | 
+    <<link '增加500口渴'>><<run iCandy.cheatAddThirty()>><<updatesidebarimg>><</link>>
+    <br>
+
+    <<link '一键清空药效'>><<run iCandy.fixDrugEffect()>><</link>>  
+    <br>
 
 <</widget>>
 

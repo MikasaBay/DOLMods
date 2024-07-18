@@ -1,13 +1,13 @@
 const oldPass = Time.pass;
 
 const timeRec = {
-    prevDate    : {},
-    currentDate : {},
+    prevDate: {},
+    currentDate: {},
     passTime(pass) {
         const { currentDate, prevDate } = this;
 
         const sec = pass;
-        let min =  currentDate.minute - prevDate.minute;
+        let min = currentDate.minute - prevDate.minute;
 
         if (min < 0) {
             min += 60;
@@ -37,13 +37,13 @@ const timeRec = {
             day,
             month,
             year,
-            weekday : [prevDate.weekDay, currentDate.weekDay]
+            weekday: [prevDate.weekDay, currentDate.weekDay]
         };
     },
 
-    event : {
-        flag : {},
-        html : {}
+    event: {
+        flag: {},
+        html: {}
     },
 
     get(flag) {
@@ -53,8 +53,8 @@ const timeRec = {
     set(flag, html) {
         if (this.event.flag[flag] == undefined) {
             this.event.flag[flag] = {
-                on    : 1,
-                times : 0
+                on: 1,
+                times: 0
             };
             this.event.html[flag] = html;
         }
@@ -130,15 +130,15 @@ Time.pass = function (sec) {
         T.addMsg = '';
     }
 
-    console.log('passed time:',passtime);
-    console.log('prevDate:',prevDate);
+    console.log('passed time:', passtime);
+    console.log('prevDate:', prevDate);
     console.log('currentDate:', currentDate);
 
     TimeHandle.prevDate = prevDate;
     TimeHandle.currentDate = currentDate;
-	
+
     iTimeHandle(passtime);
-	
+
     if (V.combat == 1) {
         iCombatHandle();
         iCombatActionHandle();
@@ -161,7 +161,7 @@ function iTimeHandle(passedSec) {
     if (passedSec <= 0) return;
 
     // 根据事件的计算单位执行进程，先是按分钟计算的事件。
-    if (passedSec / 60 >= 1 || min > 0 ||  V.combat == 1) {
+    if (passedSec / 60 >= 1 || min > 0 || V.combat == 1) {
         console.log('minute process:', passedSec, min);
         minuteProcess(passedSec, min);
     }
@@ -369,7 +369,7 @@ function dayProcess(sec, day, weekday) {
 function weekProcess(sec, day, weekday) {
     // 事件flag的清理
     iEvent.setFlag('chinatown', 'goatweek', 0);
-	
+
     // 清理商店的库存
     for (const [key, shelf] of Object.entries(V.iShop)) {
         if (key == 'selected') continue;
@@ -384,9 +384,9 @@ function sleepHandle(mode) {
     if (!V.sleeploop) {
         V.sleeploop = 1;
     }
-    
+
     if (mode == 'before') {
-        V.sleeploop++ ;
+        V.sleeploop++;
         return;
     }
 
@@ -422,15 +422,15 @@ function timeEffectHandle() {
 }
 
 Object.defineProperties(window.iCandy, {
-    timeRec       : { value : timeRec, writable : false },
-    timeHandle    : { value : iTimeHandle, writable : false },
-    minuteProcess : { value : minuteProcess, writable : false },
-    hourProcess   : { value : hourProcess, writable : false },
-    dayProcess    : { value : dayProcess, writable : false },
-    weekProcess   : { value : weekProcess, writable : false },
-    sleepHandle   : { value : sleepHandle, writable : false }
+    timeRec: { value: timeRec, writable: false },
+    timeHandle: { value: iTimeHandle, writable: false },
+    minuteProcess: { value: minuteProcess, writable: false },
+    hourProcess: { value: hourProcess, writable: false },
+    dayProcess: { value: dayProcess, writable: false },
+    weekProcess: { value: weekProcess, writable: false },
+    sleepHandle: { value: sleepHandle, writable: false }
 });
 
 Object.defineProperties(window, {
-    timeRec : { value : timeRec, writable : false }
+    timeRec: { value: timeRec, writable: false }
 });
